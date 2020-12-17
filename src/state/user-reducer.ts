@@ -1,5 +1,4 @@
 // user
-
 export type StateType = {
     name: string
     age: number
@@ -11,10 +10,6 @@ export type ActionType = {
     type: string
     [key: string]: string
 }
-
-// case 'CHANGE-NAME'
-// case 'INCREMENT-AGE'
-// case 'INCREMENT-CHILDREN-COUNT'
 
 export const userReducer = (state: StateType, action: ActionType) => {
     switch (action.type) {
@@ -28,6 +23,6 @@ export const userReducer = (state: StateType, action: ActionType) => {
         case 'CHANGE-NAME':
             return {...state, name: action.name}
         default:
-            throw new Error("I don't understand this type")
+            return state
     }
 }
