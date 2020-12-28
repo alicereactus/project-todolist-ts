@@ -1,5 +1,6 @@
+import React, { useState, ChangeEvent } from 'react';
+
 import { TextField } from '@material-ui/core';
-import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
 
 type EditableSpanType = {
   title: string
@@ -7,7 +8,7 @@ type EditableSpanType = {
 }
 
 function EditableSpan(props: EditableSpanType) {
-
+  console.log('EditableSpan called')
   const [editMode, setEditMode] = useState<boolean>(false)
   const [title, setTitle] = useState<string>(props.title)
 
