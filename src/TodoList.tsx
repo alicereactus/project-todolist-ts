@@ -43,7 +43,7 @@ const Todolist: React.FC<PropsType> = React.memo(({
   }, [removeTodoList, id])
   
   const changeTodolistTitle = useCallback((title: string) => {
-    _changeTodolistTitle(id, title);
+    _changeTodolistTitle(title, id);
   }, [_changeTodolistTitle, id])
 
   const onAllClickHandler = useCallback(() => changeFilter("all", id), [changeFilter, id]);
@@ -61,14 +61,16 @@ const Todolist: React.FC<PropsType> = React.memo(({
     tasksForTodolist = tasks.filter(task => task.isDone === true)
   }
 
-  const onClickHandler = useCallback((taskID: string) => removeTask(taskID, id), [removeTask, id])
+  const onClickHandler = useCallback((taskID: string) => {
+    removeTask(taskID, id)
+  }, [removeTask, id])
 
   const onChangeHandler = useCallback((taskID: string, isDone: boolean) => {
     _changeTaskStatus(taskID, isDone, id);
   }, [_changeTaskStatus, id])
 
   const onTitleChangeHandler = useCallback((taskID: string, title: string) => {
-    changeTaskTitle(taskID, title, id);
+    changeTaskTitle(id, taskID, title);
   }, [changeTaskTitle, id])
 
   return <div>

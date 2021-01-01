@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from 'react';
 
 import { TextField } from '@material-ui/core';
 
-type EditableSpanType = {
+export type EditableSpanType = {
   title: string
   changeValue: (newValue: string) => void
 }
