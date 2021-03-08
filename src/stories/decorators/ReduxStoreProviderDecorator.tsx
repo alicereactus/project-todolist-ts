@@ -4,6 +4,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { v1 } from 'uuid';
 import { TaskPriorities, TaskStatuses } from '../../api/todolists-api';
+import { appReducer } from '../../app/app-reducer';
 import { AppRootStateType } from '../../app/store';
 import { tasksReducer } from '../../features/TodolistsList/tasks-reducer';
 import { todolistsReducer } from '../../features/TodolistsList/todolists-reducer';
@@ -11,18 +12,19 @@ import { todolistsReducer } from '../../features/TodolistsList/todolists-reducer
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todolistsReducer
+    todolists: todolistsReducer,
+    app: appReducer
 })
 
 const initialGlobalState: AppRootStateType = {
     todolists: [
         {
             id: "todolistId1", title: "What to learn", filter: "all", addedDate: '',
-            order: 0
+            order: 0, entityStatus: "idle"
         },
         {
             id: "todolistId2", title: "What to buy", filter: "all", addedDate: '',
-            order: 0
+            order: 0, entityStatus: "idle"
         }
     ],
     tasks: {
@@ -50,7 +52,11 @@ const initialGlobalState: AppRootStateType = {
                 id: v1(), todoListId: 'todoListID2', order: 0, addedDate: ''
             }
         ]
-    }
+    },
+    app: {
+        status: "idle",
+        error: null,
+    },
 }
 
 export const storyBookStore = createStore(rootReducer, initialGlobalState, applyMiddleware(thunk));
