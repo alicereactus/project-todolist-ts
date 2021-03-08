@@ -9,7 +9,7 @@ export type StateType = {
 export type ActionType = {
     type: string
     [key: string]: string
-}
+} 
 
 export const userReducer = (state: StateType, action: ActionType) => {
     switch (action.type) {

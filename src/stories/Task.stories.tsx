@@ -2,8 +2,9 @@ import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
-
-import { Task, TaskPropsType } from '../Task';
+import { Task, TaskPropsType } from '../features/TodolistsList/Todolist/Task/Task';
+import { TaskPriorities, TaskStatuses } from '../api/todolists-api';
+import { v1 } from 'uuid';
 
 export default {
     title: 'Todolist/Task',
@@ -25,13 +26,19 @@ const baseArg = {
 export const TaskIsDone = Template.bind({});
 TaskIsDone.args = {
     ...baseArg,
-    task: { id: '1', isDone: true, title: 'CSS' },
-    todolistID: 'todolist 1'
+    task: {
+        description: '', title: "HTML&CSS", status: TaskStatuses.Completed,
+        priority: TaskPriorities.High, startDate: '', deadline: '',
+        id: v1(), todoListId: 'todoListID1', order: 0, addedDate: ''
+    },
 };
 
 export const TaskIsNotDone = Template.bind({});
 TaskIsNotDone.args = {
     ...baseArg,
-    task: { id: '2', isDone: false, title: 'JS' },
-    todolistID: 'todolist 2'
+    task: {
+        description: '', title: "HTML&CSS", status: TaskStatuses.InProgress,
+        priority: TaskPriorities.High, startDate: '', deadline: '',
+        id: v1(), todoListId: 'todoListID2', order: 0, addedDate: ''
+    },
 };
