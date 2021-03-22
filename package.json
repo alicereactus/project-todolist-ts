@@ -2,7 +2,7 @@
   "name": "it-incubator-todolist-ts",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://alicereactus.github.io/project-todolist-ts",
+  "homepage": "https://alicereactus.github.io/project-todolist-ts/",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.9.1",
