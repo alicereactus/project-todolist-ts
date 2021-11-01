@@ -1,4 +1,4 @@
-import { TaskPriorities, TaskStatuses, TaskType, todolistsAPI, TodolistType, UpdateTaskModelType } from '../../api/todolists-api'
+import { TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType } from '../../api/todolists-api'
 import { Dispatch } from 'redux'
 import { AppRootStateType } from '../../app/store'
 import { setAppStatusAC } from '../../app/app-reducer'
@@ -33,8 +33,8 @@ const slice = createSlice({
                 tasks.splice(index, 1)
             }
         },
-        addTaskAC(state, action: PayloadAction<{ task: TaskType }>) {
-            state[action.payload.task.todoListId].unshift(action.payload.task)
+        addTaskAC(state, action: PayloadAction<TaskType>) {
+            state[action.payload.todoListId].unshift(action.payload)
         },
         updateTaskAC(state, action: PayloadAction<{ taskId: string, model: UpdateDomainTaskModelType, todolistId: string }>) {
             const tasks = state[action.payload.todolistId]
@@ -65,7 +65,7 @@ const slice = createSlice({
 
 export const tasksReducer = slice.reducer
 
-const { removeTaskAC, addTaskAC, updateTaskAC, setTasksAC } = slice.actions
+export const { removeTaskAC, addTaskAC, updateTaskAC, setTasksAC } = slice.actions
 
 // thunks
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
@@ -90,7 +90,7 @@ export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispa
         .then(res => {
             if (res.data.resultCode === 0) {
                 const task = res.data.data.item
-                const action = addTaskAC({ task })
+                const action = addTaskAC(task)
                 dispatch(action)
                 dispatch(setAppStatusAC({ status: 'succeeded' }))
             } else {
